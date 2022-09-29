@@ -63,11 +63,43 @@ developing your own process.
 - Add a new toy when the toy form is submitted
 
   - How I debugged:
+  1.Under the developer tools I realized this error
+      POST http://localhost:4000/toys 500 (internal server error)
+  2. under the network tab
+      status: 500, error: "Internal Server Error",…}
+      error: "Internal Server Error"
+      exception: "#<NameError: uninitialized constant ToysController::Toys>"
+      status: 500
+      traces: {,…}
+
+3. under rails server in the terminal
+    NameError (uninitialized constant ToysController::Toys):
+
+solutiom
+<!-- add a create route in routes.rb -->
+Changed the controller name into singular form
+
+
 
 - Update the number of likes for a toy
 
   - How I debugged:
+  under console the error message
+  VM550:1 Uncaught (in promise) SyntaxError: Unexpected end of JSON input
+
+  solution 
+  returned JSON data in the response from your controller update action
+
 
 - Donate a toy to Goodwill (and delete it from our database)
 
   - How I debugged:
+    Under the network tab
+    {status: 404, error: "Not Found",…}
+    error: "Not Found"
+    exception: "#<ActionController::RoutingError: No route matches [DELETE] \"/toys/1\">"
+    status: 404
+    traces: {Application Trace: [],…}
+
+solution 
+Add a destroy route under routes.rb
